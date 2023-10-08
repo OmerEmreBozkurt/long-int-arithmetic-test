@@ -2,16 +2,38 @@
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        String a = "32567803";
+        LargeNumber t = new LargeNumber(a);
+        String c = "1234";
+        LargeNumber k = new LargeNumber(c);
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        String n = null;
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        String d = "ab123";
+        LargeNumber h = new LargeNumber(d);
+        String e = "hcd456";
+        LargeNumber g = new LargeNumber(e);
+        System.out.println(h.demo(g));
+
+        System.out.println(t);
+        System.out.println(k);
+        System.out.println(t.add(k));
+        System.out.println(k.add(t));
+
+
+
+       /*
+        if (k.getFirstDigit().getNextDigit().getValue() == 0) {
+            k.getFirstDigit().getNextDigit().getNextDigit().setValue((byte) (k.getFirstDigit().getNextDigit().getValue() - 1));
+            k.getFirstDigit().getNextDigit().setValue((byte) 57);
+            k.getFirstDigit().setValue((byte) (k.getFirstDigit().getValue() + 10));
         }
+        k.getFirstDigit().getNextDigit().setValue((byte) (k.getFirstDigit().getNextDigit().getValue() - 1));
+        k.getFirstDigit().setValue((byte) (k.getFirstDigit().getValue() + 10));
+
+        System.out.println(k);
+        */
     }
+
+
 }
