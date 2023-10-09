@@ -9,11 +9,14 @@ public class Main {
 
         String n = null;
 
-        String d = "ab123";
+        String d = "123";
         LargeNumber h = new LargeNumber(d);
-        String e = "hcd456";
+        String e = "456";
         LargeNumber g = new LargeNumber(e);
         System.out.println(h.demo(g));
+
+        System.out.println(h.add(g));
+        System.out.println(g.add(h));
 
         System.out.println(t);
         System.out.println(k);

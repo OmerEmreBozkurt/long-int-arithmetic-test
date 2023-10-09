@@ -45,7 +45,11 @@ public class LargeNumber {
     public void getDigits(String value){
         for (int i = 0; i < longInt.length(); i++) {
             Digit digit = new Digit(longInt.getBytes()[i] - 48);
-            insertFirstDigit(digit);
+            if (digit.getValue() > 9 || digit.getValue() < 0) {
+                throw new RuntimeException("Please provide valid integers.");
+            } else {
+                insertFirstDigit(digit);
+            }
         }
     }
 
@@ -87,14 +91,18 @@ public class LargeNumber {
         // there will be a method to make addition
         if (this.longInt.length() >= secondInt.longInt.length()) {
             LargeNumber l = new LargeNumber();
-            for (int i = 0; i < longInt.length() - 1; i++) {
+            for (int i = 0; i < longInt.length() ; i++) {
 
                 if (secondInt.firstDigit != null) {
                     int x = this.firstDigit.getValue();
                     int y = secondInt.firstDigit.getValue();
-                    int z = this.firstDigit.getNextDigit().getValue();
 
                     if ( x + y >= 10) {
+                        if (this.firstDigit.getNextDigit()==null ) {
+                            this.insertLastDigit(new Digit(0));
+                        }
+                        int z = this.firstDigit.getNextDigit().getValue();
+
                         this.firstDigit.getNextDigit().setValue  (z + 1);
                         l.insertLastDigit(new Digit ((x + y) % 10));
                     } else {l.insertLastDigit(new Digit (x + y));}
@@ -102,8 +110,12 @@ public class LargeNumber {
                     this.deleteFirstDigit();
                     secondInt.deleteFirstDigit();
                     if (secondInt.firstDigit == null) {
-                        l.insertLastDigit(new Digit(this.getFirstDigit().getValue()));
-                        this.deleteFirstDigit();
+                        if (this.getFirstDigit() != null) {
+                            l.insertLastDigit(new Digit(this.getFirstDigit().getValue()));
+                            this.deleteFirstDigit();
+                        } else {
+                            break;
+                        }
                     } else if (this.firstDigit == null) {
                         break;
                     }
