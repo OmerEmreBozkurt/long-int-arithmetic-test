@@ -89,43 +89,46 @@ public class LargeNumber {
 
     public String add(LargeNumber secondInt){
         // there will be a method to make addition
-        if (this.longInt.length() >= secondInt.longInt.length()) {
+        LargeNumber number1 = new LargeNumber(this.longInt);
+        LargeNumber number2 = new LargeNumber(secondInt.longInt);
+
+        if (number1.longInt.length() >= number2.longInt.length()) {
             LargeNumber l = new LargeNumber();
             for (int i = 0; i < longInt.length() ; i++) {
 
-                if (secondInt.firstDigit != null) {
-                    int x = this.firstDigit.getValue();
-                    int y = secondInt.firstDigit.getValue();
+                if (number2.firstDigit != null) {
+                    int x = number1.firstDigit.getValue();
+                    int y = number2.firstDigit.getValue();
 
                     if ( x + y >= 10) {
-                        if (this.firstDigit.getNextDigit()==null ) {
-                            this.insertLastDigit(new Digit(0));
+                        if (number1.firstDigit.getNextDigit()==null ) {
+                            number1.insertLastDigit(new Digit(0));
                         }
-                        int z = this.firstDigit.getNextDigit().getValue();
+                        int z = number1.firstDigit.getNextDigit().getValue();
 
-                        this.firstDigit.getNextDigit().setValue  (z + 1);
+                        number1.firstDigit.getNextDigit().setValue  (z + 1);
                         l.insertLastDigit(new Digit ((x + y) % 10));
                     } else {l.insertLastDigit(new Digit (x + y));}
 
-                    this.deleteFirstDigit();
-                    secondInt.deleteFirstDigit();
-                    if (secondInt.firstDigit == null) {
-                        if (this.getFirstDigit() != null) {
-                            l.insertLastDigit(new Digit(this.getFirstDigit().getValue()));
-                            this.deleteFirstDigit();
+                    number1.deleteFirstDigit();
+                    number2.deleteFirstDigit();
+                    if (number2.firstDigit == null) {
+                        if (number1.getFirstDigit() != null) {
+                            l.insertLastDigit(new Digit(number1.getFirstDigit().getValue()));
+                            number1.deleteFirstDigit();
                         } else {
                             break;
                         }
-                    } else if (this.firstDigit == null) {
+                    } else if (number1.firstDigit == null) {
                         break;
                     }
-                } else if (this.firstDigit != null) {
-                    l.insertLastDigit(new Digit(this.getFirstDigit().getValue()));
-                    this.deleteFirstDigit();
+                } else if (number1.firstDigit != null) {
+                    l.insertLastDigit(new Digit(number1.getFirstDigit().getValue()));
+                    number1.deleteFirstDigit();
                 }
             }
             return l.toString();
-        } else {return new LargeNumber(secondInt.longInt).add(new LargeNumber(this.longInt));}
+        } else {return new LargeNumber(number2.longInt).add(new LargeNumber(number1.longInt));}
     }
 
     public String sub(LargeNumber longInt2){
