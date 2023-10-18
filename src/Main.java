@@ -13,15 +13,21 @@ public class Main {
         LargeNumber h = new LargeNumber(d);
         String e = "456";
         LargeNumber g = new LargeNumber(e);
-        System.out.println(h.demo(g));
 
-        System.out.println(h.add(g));
-        System.out.println(g.add(h));
+        System.out.println("h + g = " + h.add(g));
+        System.out.println("g + h = " + g.add(h));
 
         System.out.println(t);
         System.out.println(k);
-        System.out.println(t.add(k));
-        System.out.println(k.add(t));
+        System.out.println("t + k = " + t.add(k));
+        System.out.println("k + t = " + k.add(t));
+
+        System.out.println("t - k = " + t.sub(k));
+        System.out.println("k - t = " + k.sub(t));
+
+        System.out.println("h - g = " + h.sub(g));
+        System.out.println("g - h = " + g.sub(h));
+
 
 
 
