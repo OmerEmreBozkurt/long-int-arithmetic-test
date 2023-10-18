@@ -14,11 +14,14 @@ public class Main {
         String e = "456";
         LargeNumber g = new LargeNumber(e);
 
+        System.out.println("h = " + h);
+        System.out.println("g = " + g);
+
         System.out.println("h + g = " + h.add(g));
         System.out.println("g + h = " + g.add(h));
 
-        System.out.println(t);
-        System.out.println(k);
+        System.out.println("t = " + t);
+        System.out.println("k = " + k);
         System.out.println("t + k = " + t.add(k));
         System.out.println("k + t = " + k.add(t));
 
