@@ -89,6 +89,7 @@ public class LargeNumber {
             deleteLastDigit();
         }
     }
+
     public String add(LargeNumber secondInt){
         // there will be a method to make addition
         LargeNumber number1 = new LargeNumber(this.longInt);
@@ -196,8 +197,7 @@ public class LargeNumber {
         LargeNumber number1 = new LargeNumber(this.longInt);
         LargeNumber number2 = new LargeNumber(secondInt.longInt);
 
-        LargeNumber result = new LargeNumber("0");
-        LargeNumber multiplyResult = new LargeNumber();
+        LargeNumber result = new LargeNumber("1");
 
         for (int i = 0; i < number2.longInt.length(); i++) {
             for (int j = 0; j < number1.longInt.length(); j++) {
@@ -208,7 +208,11 @@ public class LargeNumber {
                     addResult.insertFirstDigit(new Digit(0));
                 }
                 number1.deleteFirstDigit();
-                result.add(addResult);
+
+                System.out.println(addResult);
+                LargeNumber a = new LargeNumber(addResult.toString());
+                System.out.println(a);
+                result.add(a);
             }
             number2.deleteFirstDigit();
         }

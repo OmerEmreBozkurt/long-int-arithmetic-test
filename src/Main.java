@@ -7,9 +7,9 @@ public class Main {
        // LargeNumber LNte = new LargeNumber("1");
         //System.out.println(LNt.add(LNte));
 
-        LargeNumber kerl = new LargeNumber("5");
-        LargeNumber taka = new LargeNumber("3");
-
+        LargeNumber kerl = new LargeNumber("15");
+        LargeNumber taka = new LargeNumber("0");
+        System.out.println(kerl.add(taka));
         System.out.println(kerl.multiply(taka));
 
         //LargeNumber LNt2 = new LargeNumber("100");
