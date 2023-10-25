@@ -2,42 +2,19 @@
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        String a = "32567803";
-        LargeNumber t = new LargeNumber(a);
-        String c = "1234";
-        LargeNumber k = new LargeNumber(c);
 
-        String n = null;
+        //LargeNumber LNt = new LargeNumber("999999");
+       // LargeNumber LNte = new LargeNumber("1");
+        //System.out.println(LNt.add(LNte));
 
-        String d = "123";
-        LargeNumber h = new LargeNumber(d);
-        String e = "456";
-        LargeNumber g = new LargeNumber(e);
+        LargeNumber kerl = new LargeNumber("5");
+        LargeNumber taka = new LargeNumber("3");
 
-        System.out.println("h = " + h);
-        System.out.println("g = " + g);
+        System.out.println(kerl.multiply(taka));
 
-        System.out.println("h + g = " + h.add(g));
-        System.out.println("g + h = " + g.add(h));
-
-        System.out.println("t = " + t);
-        System.out.println("k = " + k);
-        System.out.println("t + k = " + t.add(k));
-        System.out.println("k + t = " + k.add(t));
-
-        System.out.println("t - k = " + t.sub(k));
-        System.out.println("k - t = " + k.sub(t));
-
-        System.out.println("h - g = " + h.sub(g));
-        System.out.println("g - h = " + g.sub(h));
-
-        LargeNumber LNt = new LargeNumber("99999999999999999");
-        LargeNumber LNte = new LargeNumber("1");
-        System.out.println(LNt.add(LNte));
-
-        LargeNumber LNt2 = new LargeNumber("100");
-        LargeNumber LNte2 = new LargeNumber("1");
-        System.out.println(LNt2.sub(LNte2));
+        //LargeNumber LNt2 = new LargeNumber("100");
+        //LargeNumber LNte2 = new LargeNumber("1");
+        //System.out.println(LNt2.sub(LNte2));
 
 
        /*
