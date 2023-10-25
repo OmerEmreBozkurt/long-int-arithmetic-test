@@ -31,7 +31,13 @@ public class Main {
         System.out.println("h - g = " + h.sub(g));
         System.out.println("g - h = " + g.sub(h));
 
+        LargeNumber LNt = new LargeNumber("99999999999999999");
+        LargeNumber LNte = new LargeNumber("1");
+        System.out.println(LNt.add(LNte));
 
+        LargeNumber LNt2 = new LargeNumber("100");
+        LargeNumber LNte2 = new LargeNumber("1");
+        System.out.println(LNt2.sub(LNte2));
 
 
        /*
