@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.util.Objects;
+
 public class LargeNumber {
     private String longInt;
     private Digit firstDigit;
@@ -90,7 +93,9 @@ public class LargeNumber {
         }
     }
 
-    public String add(LargeNumber secondInt){
+    private void createLongInt(){this.longInt = this.toString();}
+
+    public LargeNumber add(LargeNumber secondInt){
         // there will be a method to make addition
         LargeNumber number1 = new LargeNumber(this.longInt);
         LargeNumber number2 = new LargeNumber(secondInt.longInt);
@@ -127,6 +132,7 @@ public class LargeNumber {
                                 number1.deleteFirstDigit();
                             } else {
                                 l.insertLastDigit(new Digit(number1.getFirstDigit().getValue()));
+                                number1.deleteFirstDigit();
                             }
                         } else {break;}
 
@@ -142,11 +148,12 @@ public class LargeNumber {
             }
 
             l.deleteZeros();
-            return l.toString();
+            return l;
         } else {return new LargeNumber(number2.longInt).add(new LargeNumber(number1.longInt));}
     }
 
-    public String sub(LargeNumber secondInt){
+
+    public LargeNumber sub(LargeNumber secondInt){
         // there will be a method to make subtraction
         LargeNumber number1 = new LargeNumber(this.longInt);
         LargeNumber number2 = new LargeNumber(secondInt.longInt);
@@ -154,7 +161,12 @@ public class LargeNumber {
         if (number1.longInt.length() >= number2.longInt.length()) {
             LargeNumber l = new LargeNumber();
 
+            while (number1.longInt.length() != number2.longInt.length()){
+                number2.insertLastDigit(new Digit(0));
+                number2.createLongInt();
+            }
             for (int i = 0; i < number1.longInt.length(); i++) {
+
 
                 if (number2.firstDigit != null) {
                     int x = number1.getFirstDigit().getValue();
@@ -165,7 +177,7 @@ public class LargeNumber {
                             x = x + 10;
                             number1.firstDigit.getNextDigit().setValue(number1.firstDigit.getNextDigit().getValue() - 1);
                         } else {
-                            return "-" + new LargeNumber(number2.longInt).sub(new LargeNumber(number1.longInt));
+                            return new LargeNumber(number2.longInt).sub(new LargeNumber(number1.longInt));
                         }
                     }
 
@@ -189,40 +201,68 @@ public class LargeNumber {
                 }
             }
             l.deleteZeros();
-            return l.toString();
+            return l;
         } else {
-            return "-" + new LargeNumber(number2.longInt).sub(new LargeNumber(number1.longInt));}
+            return new LargeNumber(number2.longInt).sub(new LargeNumber(number1.longInt));}
     }
-    public String multiply(LargeNumber secondInt){
-        LargeNumber number1 = new LargeNumber(this.longInt);
+    public LargeNumber multiply(LargeNumber secondInt){
+        if (Objects.equals(this.longInt, "0") || Objects.equals(secondInt.longInt, "0")) {return new LargeNumber("0");}
         LargeNumber number2 = new LargeNumber(secondInt.longInt);
-
-        LargeNumber result = new LargeNumber("1");
-
+        LargeNumber result = new LargeNumber("0");
         for (int i = 0; i < number2.longInt.length(); i++) {
+            LargeNumber number1 = new LargeNumber(this.longInt);
             for (int j = 0; j < number1.longInt.length(); j++) {
                 LargeNumber addResult = new LargeNumber();
-                int tempMultiply = number1.firstDigit.getValue() * number2.firstDigit.getValue();
-                addResult.insertLastDigit(new Digit(tempMultiply));
-                for (int k = 0; k < j; k++) {
-                    addResult.insertFirstDigit(new Digit(0));
-                }
-                number1.deleteFirstDigit();
-
-                System.out.println(addResult);
-                LargeNumber a = new LargeNumber(addResult.toString());
-                System.out.println(a);
-                result.add(a);
+                if (number1.firstDigit != null){
+                    int tempMultiply = number1.firstDigit.getValue() * number2.firstDigit.getValue();
+                    addResult.insertLastDigit(new Digit(tempMultiply));
+                    for (int k = 0; k < j; k++) {addResult.insertFirstDigit(new Digit(0));}
+                    for (int k = 0; k < i; k++) {addResult.insertFirstDigit(new Digit(0));}
+                    number1.deleteFirstDigit();
+                    addResult.createLongInt();
+                    result = result.add(addResult);
+                    result.createLongInt();}
             }
             number2.deleteFirstDigit();
         }
 
 
-        return result.toString(); //this will return a String like longInt
+        return result;
     }
-    public String divide(LargeNumber secondInt){
-        // there will be a method to make division
-        return null; //this will return a String like longInt
+    public LargeNumber divide(LargeNumber secondInt){
+        LargeNumber number1 = new LargeNumber(this.longInt);
+        LargeNumber number2 = new LargeNumber(secondInt.longInt);
+        LargeNumber result = new LargeNumber();
+
+        for (int i = 0; i < number1.longInt.length(); i++) {
+            while (number1.lastDigit != null && number1.lastDigit.getValue() == 0) {
+                result.insertFirstDigit(new Digit(0));
+                number1.deleteLastDigit();
+                number1.createLongInt();
+            }
+
+            if (number1.lastDigit != null && number2.lastDigit != null) {
+                if (number1.lastDigit.getValue() / number2.lastDigit.getValue() == 0) {
+                    int tempValue = number1.lastDigit.getValue();
+                    number1.deleteLastDigit();
+                    if (number1.lastDigit == null) {
+                        break;
+                    }
+                    number1.lastDigit.setValue(number1.lastDigit.getValue() + tempValue * 10);
+                }
+                int n = number1.lastDigit.getValue() / number2.lastDigit.getValue();
+                int m = number1.lastDigit.getValue() % number2.lastDigit.getValue();
+                result.insertFirstDigit(new Digit(n));
+                number1.deleteLastDigit();
+                if (number1.lastDigit == null) {
+                    break;
+                }
+                number1.lastDigit.setValue(number1.getLastDigit().getValue() + m);
+                number1.createLongInt();
+            }
+        }
+        result.createLongInt();
+        return result;
     }
 
     @Override
